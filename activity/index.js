@@ -9,12 +9,37 @@
 
 // console.log("%c This is a colored log", "color: blue; font-size: 16px;");
 
-console.log("             _");
-console.log(" _ __   ___ | | _____ _ __ ___   ___  _ __");
-console.log("| '_  / _ | |/ / _  '_ ` _  / _ | '_ \\");
-console.log("| |_) | (_) |   <  __/ | | | | | (_) | | | |");
-console.log("| .__/ \\___/|_|\\_\\___|_| |_| |_|\\___/|_| |_|        ");
-console.log("|_|                                                    ");
+console.log(
+  "%c             _",
+  "color: #FF69B4; font-size: 16px; font-weight: bold;"
+);
+console.log(
+  "%c _ __   ___ | | _____ _ __ ___   ___  _ __",
+  "color: #FF69B4; font-size: 16px; font-weight: bold;"
+);
+console.log(
+  "%c| '_  / _ | |/ / _  '_ ` _  / _ | '_ \\ ",
+  "color: #FF69B4; font-size: 16px; font-weight: bold;"
+);
+console.log(
+  "%c| |_) | (_) |   <  __/ | | | | | (_) | | | |",
+  "color: #FF69B4; font-size: 16px; font-weight: bold;"
+);
+console.log(
+  "%c| .__/ \\___/|_|\\_\\___|_| |_| |_|\\___/|_| |_|        ",
+  "color: #FF69B4; font-size: 16px; font-weight: bold;"
+);
+console.log(
+  "%c|_|                                                    ",
+  "color: #FF69B4; font-size: 16px; font-weight: bold;"
+);
+
+// console.log("             _");
+// console.log(" _ __   ___ | | _____ _ __ ___   ___  _ __");
+// console.log("| '_  / _ | |/ / _  '_ ` _  / _ | '_ \\");
+// console.log("| |_) | (_) |   <  __/ | | | | | (_) | | | |");
+// console.log("| .__/ \\___/|_|\\_\\___|_| |_| |_|\\___/|_| |_|        ");
+// console.log("|_|                                                    ");
 
 //POKEMON BASE CLASS
 class Pokemon {
@@ -141,7 +166,6 @@ class Trainer {
 }
 
 //ADDING SUBCLASS USING POLYMORPSIM AND INHERITANCE
-
 class FirePokemon extends Pokemon {
   constructor(name, level, hp) {
     super(name, "Fire", level, hp);
@@ -414,7 +438,7 @@ class Tournament {
         if (remainingTrainers.length === 1) {
           console.log(
             `%c 👑 The tournament is over! ${remainingTrainers[0].name}  is the overall winner! and Won ${remainingTrainers[0].wins} Matches 👑`,
-            "border: 1px solid red; padding: 2px; border-radius: 2px; background-color: red; color: white; font-size: 30px;"
+            "border: 1px solid red; padding: 2px; border-radius: 2px; background-color: red; color: white; font-size: 30px; "
           );
         } else {
           console.log(`No winner, all trainers are out of Pokémon.`);
@@ -442,7 +466,6 @@ const necrozma = new LightPokemon("Necrozma", 10, 100, 0);
 const cosmoem = new LightPokemon("Cosmoem", 10, 100, 0);
 
 //CREATING NEW TRAINER ADD ADD POKEMONS IN THEIR TEAM
-
 let randompick = Math.floor(Math.random() * 2); // RANDOMIZE PICK OF POKEMON
 
 const ash = new Trainer("Ash", "Male");
