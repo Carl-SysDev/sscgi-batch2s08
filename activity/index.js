@@ -7,6 +7,8 @@
 // | .__/ \___/|_|\_\___|_| |_| |_|\___/|_| |_|
 // |_|
 
+// console.log("%c This is a colored log", "color: blue; font-size: 16px;");
+
 console.log("             _");
 console.log(" _ __   ___ | | _____ _ __ ___   ___  _ __");
 console.log("| '_  / _ | |/ / _  '_ ` _  / _ | '_ \\");
@@ -86,7 +88,7 @@ class Pokemon {
 
   powerUp() {
     this.hp += 20;
-    console.log(`${this.name} use PowerUp +20 HP`);
+    console.log(`${this.name} use PowerUp💪 +20 HP ❤️`);
   }
 
   isDead() {
@@ -147,7 +149,10 @@ class FirePokemon extends Pokemon {
 
   attack(opponent) {
     console.log("");
-    console.log(`${this.name} use FlameThrower💥 on ${opponent.name}!`);
+    console.log(
+      `%c${this.name} use FlameThrower💥 on ${opponent.name}!`,
+      "border: 1px solid orange; padding: 2px; border-radius: 2px; background-color: orange; color: black;"
+    );
     let damage = this.calculateDamage(opponent.type, 4, 10); //DEALING CRITCAL HIT ON MASMAHINA
     opponent.receivedDamage(damage);
     if (opponent.type === "Earth") {
@@ -164,7 +169,10 @@ class EarthPokemon extends Pokemon {
 
   attack(opponent) {
     console.log("");
-    console.log(`${this.name} use EarthDrive💩 on ${opponent.name}!`);
+    console.log(
+      `%c${this.name} use EarthDrive💩 on ${opponent.name}!`,
+      "border: 1px solid brown; padding: 2px; border-radius: 2px; background-color: brown; color: white;"
+    );
     let damage = this.calculateDamage(opponent.type, 4, 10); //DEALING CRITCAL HIT ON MASMAHINA
     opponent.receivedDamage(damage);
     if (opponent.type === "Water") {
@@ -181,7 +189,10 @@ class WaterPokemon extends Pokemon {
 
   attack(opponent) {
     console.log("");
-    console.log(`${this.name} use WaterGun💦 on ${opponent.name}!`);
+    console.log(
+      `%c${this.name} use WaterGun💦 on ${opponent.name}!`,
+      "border: 1px solid skyblue; padding: 2px; border-radius: 2px; background-color: skyblue; color: black;"
+    );
     let damage = this.calculateDamage(opponent.type, 4, 10); //DEALING CRITCAL HIT ON MASMAHINA
     opponent.receivedDamage(damage);
     if (opponent.type === "Wind") {
@@ -198,7 +209,11 @@ class WindPokemon extends Pokemon {
 
   attack(opponent) {
     console.log("");
-    console.log(`${this.name} use GustWing💨 on ${opponent.name}!`);
+    console.log(
+      `%c${this.name} use GustWing💨 on ${opponent.name}!`,
+      "border: 1px solid #3E7B27; padding: 2px; border-radius: 2px; background-color: #3E7B27; color: white;"
+    );
+
     let damage = this.calculateDamage(opponent.type, 4, 10); //DEALING CRITCAL HIT ON MASMAHINA
     opponent.receivedDamage(damage);
     if (opponent.type === "Fire") {
@@ -215,7 +230,10 @@ class DarkPokemon extends Pokemon {
 
   attack(opponent) {
     console.log("");
-    console.log(`${this.name} use BlackHole on ${opponent.name}!`);
+    console.log(
+      `%c${this.name} use BlackHole🌑 on ${opponent.name}!`,
+      "border: 1px solid #3E5879; padding: 2px; border-radius: 2px; background-color: #3E5879; color: white;"
+    );
     let damage = this.calculateDamage(opponent.type, 4, 10); //DEALING CRITCAL HIT ON MASMAHINA
     opponent.receivedDamage(damage);
     if (opponent.type === "Light") {
@@ -232,7 +250,10 @@ class LightPokemon extends Pokemon {
 
   attack(opponent) {
     console.log("");
-    console.log(`${this.name} use FlameThrower on ${opponent.name}!`);
+    console.log(
+      `%c${this.name} use Light Magic✨ on ${opponent.name}!`,
+      "border: 1px solid #FFF574; padding: 2px; border-radius: 2px; background-color: #FFF574; color: black;"
+    );
     let damage = this.calculateDamage(opponent.type, 4, 10); //DEALING CRITCAL HIT ON MASMAHINA
     opponent.receivedDamage(damage);
     if (opponent.type === "Dark") {
@@ -264,11 +285,16 @@ class Battle {
 
     while (game) {
       console.log("");
-      console.log(`👊 ${this.pokemon1.name} Turn to Attack.`);
+      console.log(
+        `🔄 %c${this.pokemon1.name}` + " Turn to Attack",
+        "border: 1px solid black; padding: 2px; border-radius: 2px; background-color: black; color: white;"
+      );
       this.pokemon1.attack(this.pokemon2);
       if (this.pokemon2.hp > 0) {
-        console.log("");
-        console.log(`👊 ${this.pokemon2.name} Turn to Attack.`);
+        console.log(
+          `🔄 %c${this.pokemon2.name}` + " Turn to Attack",
+          "border: 1px solid black; padding: 2px; border-radius: 2px; background-color: black; color: white;"
+        );
         this.pokemon2.attack(this.pokemon1);
       }
 
@@ -282,7 +308,7 @@ class Battle {
         this.trainer2.winCounts();
         this.trainer1.losses++;
         console.log(
-          `${this.pokemon2.name} has level up to ${this.pokemon2.level}`
+          `🢁 ${this.pokemon2.name} has Leveled Up to ${this.pokemon2.level}`
         );
         console.log("************************************");
       }
@@ -293,7 +319,7 @@ class Battle {
         this.trainer1.winCounts();
         this.trainer2.losses++;
         console.log(
-          `${this.pokemon1.name} has level up to ${this.pokemon1.level}`
+          `🢁 ${this.pokemon1.name} has Leveld Up to ${this.pokemon1.level}`
         );
         console.log("************************************");
       }
@@ -337,7 +363,8 @@ class Tournament {
     } while (trainer1 === trainer2);
     console.log("");
     console.log(
-      `⚔️ Match between ${trainer1.name} ${trainer1.wins}-Wins 🆚 ${trainer2.name} ${trainer2.wins}-Wins ⚔️`
+      `%c ⚔️  Match between ${trainer1.name} ${trainer1.wins}-Wins 🆚 ${trainer2.name} ${trainer2.wins}-Wins ⚔️ `,
+      "border: 1px solid black; padding: 2px; border-radius: 2px; font-size: 20px;"
     );
     this.startMatch(trainer1, trainer2);
   }
@@ -390,7 +417,8 @@ class Tournament {
       if (remainingTrainers.length <= 1) {
         if (remainingTrainers.length === 1) {
           console.log(
-            ` 👑 The tournament is over! ${remainingTrainers[0].name}  is the overall winner! and Won ${remainingTrainers[0].wins} Matches`
+            `%c 👑 The tournament is over! ${remainingTrainers[0].name}  is the overall winner! and Won ${remainingTrainers[0].wins} Matches 👑`,
+            "border: 1px solid red; padding: 2px; border-radius: 2px; background-color: red; color: white; font-size: 30px;"
           );
         } else {
           console.log(`No winner, all trainers are out of Pokémon.`);
