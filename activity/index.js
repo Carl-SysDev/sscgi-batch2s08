@@ -44,8 +44,7 @@ class Pokemon {
   heal() {
     let randomhp = Math.floor(Math.random() * (15 - 5)) + 5;
     let defboost = (this.def = +5);
-    this.hp += defboost;
-    this.hp += randomhp;
+    this.hp = Math.min(this.hp + defboost + randomhp, 100); // THIS CODE LET HP NOT EXCEED 100
     console.log(
       `${this.name} active unique passive skill and gained [${defboost}] Defense and heal [${randomhp}] HP `
     );
@@ -54,11 +53,12 @@ class Pokemon {
   calculateDamage(opponentType, minDamage, maxDamage) {
     let isSuperEffective = false;
     const counterEffect = {
-      Fire: "Earth",
-      Earh: "Water",
-      Water: "Wind",
-      Wind: "Fire",
+      Fire: "Rock",
+      Rock: "Water",
+      Water: "Grass",
+      Grass: "Dark",
       Dark: "Light",
+      Light: "Fire",
     };
 
     if (counterEffect[this.type] === opponentType) {
@@ -155,22 +155,22 @@ class FirePokemon extends Pokemon {
     );
     let damage = this.calculateDamage(opponent.type, 4, 10); //DEALING CRITCAL HIT ON MASMAHINA
     opponent.receivedDamage(damage);
-    if (opponent.type === "Earth") {
+    if (opponent.type === "Rock") {
       console.log("SUPER EFFECTIVE");
       opponent.heal(); //UNIQUE SKILL HEAL
     }
   }
 }
 
-class EarthPokemon extends Pokemon {
+class RockPokemon extends Pokemon {
   constructor(name, level, hp) {
-    super(name, "Earth", level, hp);
+    super(name, "Rock", level, hp);
   }
 
   attack(opponent) {
     console.log("");
     console.log(
-      `%c${this.name} use EarthDrive💩 on ${opponent.name}!`,
+      `%c${this.name} use RockDrive💩 on ${opponent.name}!`,
       "border: 1px solid brown; padding: 2px; border-radius: 2px; background-color: brown; color: white;"
     );
     let damage = this.calculateDamage(opponent.type, 4, 10); //DEALING CRITCAL HIT ON MASMAHINA
@@ -195,28 +195,28 @@ class WaterPokemon extends Pokemon {
     );
     let damage = this.calculateDamage(opponent.type, 4, 10); //DEALING CRITCAL HIT ON MASMAHINA
     opponent.receivedDamage(damage);
-    if (opponent.type === "Wind") {
+    if (opponent.type === "Grass") {
       console.log("SUPER EFFECTIVE");
       opponent.heal(); //UNIQUE SKILL HEAL
     }
   }
 }
 
-class WindPokemon extends Pokemon {
+class GrassPokemon extends Pokemon {
   constructor(name, level, hp) {
-    super(name, "Wind", level, hp);
+    super(name, "Grass", level, hp);
   }
 
   attack(opponent) {
     console.log("");
     console.log(
-      `%c${this.name} use GustWing💨 on ${opponent.name}!`,
+      `%c${this.name} use VineWhip🌱 on ${opponent.name}!`,
       "border: 1px solid #3E7B27; padding: 2px; border-radius: 2px; background-color: #3E7B27; color: white;"
     );
 
     let damage = this.calculateDamage(opponent.type, 4, 10); //DEALING CRITCAL HIT ON MASMAHINA
     opponent.receivedDamage(damage);
-    if (opponent.type === "Fire") {
+    if (opponent.type === "Dark") {
       console.log("SUPER EFFECTIVE");
       opponent.heal(); //UNIQUE SKILL HEAL
     }
@@ -256,7 +256,7 @@ class LightPokemon extends Pokemon {
     );
     let damage = this.calculateDamage(opponent.type, 4, 10); //DEALING CRITCAL HIT ON MASMAHINA
     opponent.receivedDamage(damage);
-    if (opponent.type === "Dark") {
+    if (opponent.type === "Fire") {
       console.log("SUPER EFFECTIVE");
       opponent.heal(); //UNIQUE SKILL HEAL
     }
@@ -291,6 +291,7 @@ class Battle {
       );
       this.pokemon1.attack(this.pokemon2);
       if (this.pokemon2.hp > 0) {
+        console.log("");
         console.log(
           `🔄 %c${this.pokemon2.name}` + " Turn to Attack",
           "border: 1px solid black; padding: 2px; border-radius: 2px; background-color: black; color: white;"
@@ -310,7 +311,10 @@ class Battle {
         console.log(
           `🢁 ${this.pokemon2.name} has Leveled Up to ${this.pokemon2.level}`
         );
-        console.log("************************************");
+        console.log(
+          "%c---------------------------",
+          "color: red; font-size: 30px;"
+        );
       }
 
       if (this.pokemon2.hp <= 0) {
@@ -321,7 +325,10 @@ class Battle {
         console.log(
           `🢁 ${this.pokemon1.name} has Leveld Up to ${this.pokemon1.level}`
         );
-        console.log("************************************");
+        console.log(
+          "%c---------------------------",
+          "color: red; font-size: 30px;"
+        );
       }
     }
   }
@@ -342,17 +349,6 @@ class Tournament {
       return; // Not enough trainers for a match
     }
 
-    //CHECK THE TRAINERS BASED ON THEIR WINS (UNSTABLE)
-    // //CHECK TRAINERS BASED ON THERE WIN LOSS
-    // availableTrainers.sort((a, b) => {
-    //   const winLossA = a.wins / (a.wins + a.losses);
-    //   const winLossB = b.wins / (b.wins + b.losses);
-    //   return winLossB - winLossA;
-    // });
-
-    // const trainer1 = availableTrainers[0];
-    // const trainer2 = availableTrainers[1];
-
     // THIS IS THE RANDOM TRAINER SELECTION
     const trainer1 =
       availableTrainers[Math.floor(Math.random() * availableTrainers.length)];
@@ -363,8 +359,8 @@ class Tournament {
     } while (trainer1 === trainer2);
     console.log("");
     console.log(
-      `%c ⚔️  Match between ${trainer1.name} ${trainer1.wins}-Wins 🆚 ${trainer2.name} ${trainer2.wins}-Wins ⚔️ `,
-      "border: 1px solid black; padding: 2px; border-radius: 2px; font-size: 20px;"
+      `       %c ⚔️  Match between ${trainer1.name} ${trainer1.wins}-Wins 🆚 ${trainer2.name} ${trainer2.wins}-Wins ⚔️ `,
+      "border: 1px solid black; padding: 2px; border-radius: 2px; font-size: 20px; "
     );
     this.startMatch(trainer1, trainer2);
   }
@@ -433,14 +429,14 @@ class Tournament {
 
 //CREATING POKEMON
 const charizard = new FirePokemon("Charizard", 10, 100, 0);
-const stone = new EarthPokemon("Stone", 10, 100, 0);
+const stone = new RockPokemon("Stone", 10, 100, 0);
 const starfish = new WaterPokemon("Starfish", 10, 100, 0);
-const birdy = new WindPokemon("Birdy", 10, 100, 0);
+const birdy = new GrassPokemon("Birdy", 10, 100, 0);
 const gengar = new DarkPokemon("Gengar", 10, 100);
 const charmander = new FirePokemon("Charmander", 10, 100, 0);
-const machop = new EarthPokemon("Machop", 10, 100, 0);
+const machop = new RockPokemon("Machop", 10, 100, 0);
 const squirtle = new WaterPokemon("Squirtle", 10, 100, 0);
-const zubat = new WindPokemon("Zubat", 10, 100, 0);
+const zubat = new GrassPokemon("Zubat", 10, 100, 0);
 const mew = new DarkPokemon("Mew", 10, 100, 0);
 const necrozma = new LightPokemon("Necrozma", 10, 100, 0);
 const cosmoem = new LightPokemon("Cosmoem", 10, 100, 0);
