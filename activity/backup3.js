@@ -1,20 +1,6 @@
 // console.log("test");
 
-//             _
-// _ __   ___ | | _____ _ __ ___   ___  _ __
-// | '_ \ / _ \| |/ / _ \ '_ ` _ \ / _ \| '_ \
-// | |_) | (_) |   <  __/ | | | | | (_) | | | |
-// | .__/ \___/|_|\_\___|_| |_| |_|\___/|_| |_|
-// |_|
-
-console.log("             _");
-console.log(" _ __   ___ | | _____ _ __ ___   ___  _ __");
-console.log("| '_  / _ | |/ / _  '_ ` _  / _ | '_ \\");
-console.log("| |_) | (_) |   <  __/ | | | | | (_) | | | |");
-console.log("| .__/ \\___/|_|\\_\\___|_| |_| |_|\\___/|_| |_|        ");
-console.log("|_|                                                    ");
-
-//POKEMON BASE CLASS
+//POKEMON
 class Pokemon {
   constructor(name, type, level, hp, def) {
     this.name = name;
@@ -101,7 +87,6 @@ class Trainer {
     this.gender = gender;
     this.pokemons = [];
     this.wins = 0;
-    this.losses = 0;
   }
 
   choosePokemon(pokemon) {
@@ -164,7 +149,7 @@ class EarthPokemon extends Pokemon {
 
   attack(opponent) {
     console.log("");
-    console.log(`${this.name} use EarthDrive💩 on ${opponent.name}!`);
+    console.log(`${this.name} use EarthDrive on ${opponent.name}!`);
     let damage = this.calculateDamage(opponent.type, 4, 10); //DEALING CRITCAL HIT ON MASMAHINA
     opponent.receivedDamage(damage);
     if (opponent.type === "Water") {
@@ -181,7 +166,7 @@ class WaterPokemon extends Pokemon {
 
   attack(opponent) {
     console.log("");
-    console.log(`${this.name} use WaterGun💦 on ${opponent.name}!`);
+    console.log(`${this.name} use WaterGun on ${opponent.name}!`);
     let damage = this.calculateDamage(opponent.type, 4, 10); //DEALING CRITCAL HIT ON MASMAHINA
     opponent.receivedDamage(damage);
     if (opponent.type === "Wind") {
@@ -198,7 +183,7 @@ class WindPokemon extends Pokemon {
 
   attack(opponent) {
     console.log("");
-    console.log(`${this.name} use GustWing💨 on ${opponent.name}!`);
+    console.log(`${this.name} use GustWing on ${opponent.name}!`);
     let damage = this.calculateDamage(opponent.type, 4, 10); //DEALING CRITCAL HIT ON MASMAHINA
     opponent.receivedDamage(damage);
     if (opponent.type === "Fire") {
@@ -248,7 +233,7 @@ class Battle {
   constructor(pokemon1, pokemon2, trainer1, trainer2) {
     this.pokemon1 = pokemon1;
     this.pokemon2 = pokemon2;
-    this.trainer1 = trainer1; //ADD THIS TO TRACK USER WIN AND LOOSE
+    this.trainer1 = trainer1;
     this.trainer2 = trainer2;
   }
 
@@ -280,7 +265,6 @@ class Battle {
         console.log(`${this.pokemon2.name} has Win the battle!`);
         this.pokemon2.level++;
         this.trainer2.winCounts();
-        this.trainer1.losses++;
         console.log(
           `${this.pokemon2.name} has level up to ${this.pokemon2.level}`
         );
@@ -291,7 +275,6 @@ class Battle {
         console.log(`${this.pokemon1.name} has Win the battle`);
         this.pokemon1.level++;
         this.trainer1.winCounts();
-        this.trainer2.losses++;
         console.log(
           `${this.pokemon1.name} has level up to ${this.pokemon1.level}`
         );
@@ -316,18 +299,6 @@ class Tournament {
       return; // Not enough trainers for a match
     }
 
-    //CHECK THE TRAINERS BASED ON THEIR WINS (UNSTABLE)
-    // //CHECK TRAINERS BASED ON THERE WIN LOSS
-    // availableTrainers.sort((a, b) => {
-    //   const winLossA = a.wins / (a.wins + a.losses);
-    //   const winLossB = b.wins / (b.wins + b.losses);
-    //   return winLossB - winLossA;
-    // });
-
-    // const trainer1 = availableTrainers[0];
-    // const trainer2 = availableTrainers[1];
-
-    // THIS IS THE RANDOM TRAINER SELECTION
     const trainer1 =
       availableTrainers[Math.floor(Math.random() * availableTrainers.length)];
     let trainer2;
