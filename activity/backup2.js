@@ -2,13 +2,13 @@
 
 //POKEMON
 class Pokemon {
-  constructor(name, type, level, hp, def) {
+  constructor(name, type, level, hp) {
     this.name = name;
     this.type = type;
     this.level = level;
     this.hp = hp;
     // this.atk = atk;
-    this.def = def;
+    // this.def = def;
   }
 
   attack(opponent) {
@@ -33,34 +33,8 @@ class Pokemon {
     );
   }
 
-  calculateDamage(opponentType, minDamage, maxDamage) {
-    let isSuperEffective = false;
-    const counterEffect = {
-      Fire: "Earth",
-      Earh: "Water",
-      Water: "Wind",
-      Wind: "Fire",
-      Dark: "Light",
-    };
-
-    if (counterEffect[this.type] === opponentType) {
-      isSuperEffective = true;
-    }
-
-    const dmgMultiplier = isSuperEffective ? 0.5 : 0.2;
-    const damage = Math.floor(
-      this.level *
-        (Math.random() * (maxDamage - minDamage) + minDamage) *
-        dmgMultiplier
-    );
-
-    console.log(
-      `${this.name} deals ${damage} ${
-        isSuperEffective ? "Critical Damage (Super Effective)" : "Damage"
-      } to the Opponent`
-    );
-
-    return damage;
+  calculateDamage() {
+    console.log(`${this.name} deal damage `);
   }
 
   // criticalDamage() {
@@ -84,7 +58,6 @@ class Trainer {
     this.name = name;
     this.gender = gender;
     this.pokemons = [];
-    this.wins = 0;
   }
 
   choosePokemon(pokemon) {
@@ -114,11 +87,6 @@ class Trainer {
   pokemonLeft() {
     return this.pokemons.some((pokemon) => !pokemon.isDead());
   }
-
-  winCounts() {
-    this.wins += 1;
-    return console.log(`${this.wins} Wins`);
-  }
 }
 
 //ADDING SUBCLASS USING POLYMORPSIM AND INHERITANCE
@@ -131,11 +99,21 @@ class FirePokemon extends Pokemon {
   attack(opponent) {
     console.log("");
     console.log(`${this.name} use FlameThrower on ${opponent.name}!`);
-    let damage = this.calculateDamage(opponent.type, 4, 10); //DEALING CRITCAL HIT ON MASMAHINA
-    opponent.receivedDamage(damage);
+
     if (opponent.type === "Earth") {
+      let damage = this.level * Math.floor(Math.random() * (10 - 7)) + 7; //DEALING CRITCAL HIT ON MASMAHINA
+      opponent.receivedDamage(damage);
       console.log("SUPER EFFECTIVE");
+      // console.log(`${this.name} ${this.calculateDamage}`);
+
+      console.log(
+        `${this.name} dealt ${damage} Critical Damage to ${opponent.name}`
+      );
       opponent.heal(); //UNIQUE SKILL HEAL
+    } else {
+      let damage = this.level * Math.floor(Math.random() * (5 - 2)) + 2;
+      opponent.receivedDamage(damage);
+      console.log(`${this.name} dealt ${damage} Damage to ${opponent.name}`);
     }
   }
 }
@@ -147,12 +125,19 @@ class EarthPokemon extends Pokemon {
 
   attack(opponent) {
     console.log("");
-    console.log(`${this.name} use FlameThrower on ${opponent.name}!`);
-    let damage = this.calculateDamage(opponent.type, 4, 10); //DEALING CRITCAL HIT ON MASMAHINA
-    opponent.receivedDamage(damage);
+    console.log(`${this.name} use EarthDrive on ${opponent.name}!`);
     if (opponent.type === "Water") {
+      let damage = this.level * Math.floor(Math.random() * (10 - 7)) + 7;
+      opponent.receivedDamage(damage);
       console.log("SUPER EFFECTIVE");
-      opponent.heal(); //UNIQUE SKILL HEAL
+      console.log(
+        `${this.name} dealt ${damage} Critical Damage to ${opponent.name}`
+      );
+      opponent.heal();
+    } else {
+      let damage = this.level * Math.floor(Math.random() * (5 - 2)) + 2;
+      opponent.receivedDamage(damage);
+      console.log(`${this.name} dealt ${damage} Damage to ${opponent.name}`);
     }
   }
 }
@@ -164,12 +149,19 @@ class WaterPokemon extends Pokemon {
 
   attack(opponent) {
     console.log("");
-    console.log(`${this.name} use FlameThrower on ${opponent.name}!`);
-    let damage = this.calculateDamage(opponent.type, 4, 10); //DEALING CRITCAL HIT ON MASMAHINA
-    opponent.receivedDamage(damage);
+    console.log(`${this.name} use WaterGun on ${opponent.name}!`);
     if (opponent.type === "Wind") {
+      let damage = this.level * Math.floor(Math.random() * (10 - 7)) + 7;
+      opponent.receivedDamage(damage);
       console.log("SUPER EFFECTIVE");
-      opponent.heal(); //UNIQUE SKILL HEAL
+      console.log(
+        `${this.name} dealt ${damage} Critical Damage to ${opponent.name}`
+      );
+      opponent.heal();
+    } else {
+      let damage = this.level * Math.floor(Math.random() * (5 - 2)) + 2;
+      opponent.receivedDamage(damage);
+      console.log(`${this.name} dealt ${damage} Damage to ${opponent.name}`);
     }
   }
 }
@@ -181,12 +173,19 @@ class WindPokemon extends Pokemon {
 
   attack(opponent) {
     console.log("");
-    console.log(`${this.name} use FlameThrower on ${opponent.name}!`);
-    let damage = this.calculateDamage(opponent.type, 4, 10); //DEALING CRITCAL HIT ON MASMAHINA
-    opponent.receivedDamage(damage);
+    console.log(`${this.name} use GustWing on ${opponent.name}!`);
     if (opponent.type === "Fire") {
+      let damage = this.level * Math.floor(Math.random() * (10 - 7)) + 7;
+      opponent.receivedDamage(damage);
       console.log("SUPER EFFECTIVE");
-      opponent.heal(); //UNIQUE SKILL HEAL
+      console.log(
+        `${this.name} dealt ${damage} Critical Damage to ${opponent.name}`
+      );
+      opponent.heal();
+    } else {
+      let damage = this.level * Math.floor(Math.random() * (5 - 2)) + 2;
+      opponent.receivedDamage(damage);
+      console.log(`${this.name} dealt ${damage} Damage to ${opponent.name}`);
     }
   }
 }
@@ -198,46 +197,23 @@ class DarkPokemon extends Pokemon {
 
   attack(opponent) {
     console.log("");
-    console.log(`${this.name} use FlameThrower on ${opponent.name}!`);
-    let damage = this.calculateDamage(opponent.type, 4, 10); //DEALING CRITCAL HIT ON MASMAHINA
+    console.log(`${this.name} use BlackHole on ${opponent.name}!`);
+    let damage = this.level * Math.floor(Math.random() * (5 - 2)) + 2;
     opponent.receivedDamage(damage);
-    if (opponent.type === "Light") {
-      console.log("SUPER EFFECTIVE");
-      opponent.heal(); //UNIQUE SKILL HEAL
-    }
-  }
-}
-
-class LightPokemon extends Pokemon {
-  constructor(name, level, hp) {
-    super(name, "Light", level, hp);
-  }
-
-  attack(opponent) {
-    console.log("");
-    console.log(`${this.name} use FlameThrower on ${opponent.name}!`);
-    let damage = this.calculateDamage(opponent.type, 4, 10); //DEALING CRITCAL HIT ON MASMAHINA
-    opponent.receivedDamage(damage);
-    if (opponent.type === "Dark") {
-      console.log("SUPER EFFECTIVE");
-      opponent.heal(); //UNIQUE SKILL HEAL
-    }
+    console.log(`${this.name} dealt ${damage} Damage to ${opponent.name}`);
   }
 }
 
 //BATTLEGROND
 class Battle {
-  //ADD TRAINER TO RECORD THE WINS
-  constructor(pokemon1, pokemon2, trainer1, trainer2) {
+  constructor(pokemon1, pokemon2) {
     this.pokemon1 = pokemon1;
     this.pokemon2 = pokemon2;
-    this.trainer1 = trainer1;
-    this.trainer2 = trainer2;
   }
 
   startBattle() {
     console.log(
-      `The battle Between ${this.pokemon1.name} ❌ ${this.pokemon2.name} has begun! `
+      `The battle Between ${this.pokemon1.name} 🆚 ${this.pokemon2.name} has begun! `
     );
     console.log("");
     // let powers = Math.floor(Math.random() * 2);
@@ -262,7 +238,6 @@ class Battle {
       if (this.pokemon1.hp <= 0) {
         console.log(`${this.pokemon2.name} has Win the battle!`);
         this.pokemon2.level++;
-        this.trainer2.winCounts();
         console.log(
           `${this.pokemon2.name} has level up to ${this.pokemon2.level}`
         );
@@ -272,7 +247,6 @@ class Battle {
       if (this.pokemon2.hp <= 0) {
         console.log(`${this.pokemon1.name} has Win the battle`);
         this.pokemon1.level++;
-        this.trainer1.winCounts();
         console.log(
           `${this.pokemon1.name} has level up to ${this.pokemon1.level}`
         );
@@ -305,9 +279,7 @@ class Tournament {
         availableTrainers[Math.floor(Math.random() * availableTrainers.length)];
     } while (trainer1 === trainer2);
     console.log("");
-    console.log(
-      `⚔️ Match between ${trainer1.name} ${trainer1.wins}-Wins 🆚 ${trainer2.name} ${trainer2.wins}-Wins ⚔️`
-    );
+    console.log(`⚔️ Match between ${trainer1.name} and ${trainer2.name} ⚔️`);
     this.startMatch(trainer1, trainer2);
   }
 
@@ -330,7 +302,7 @@ class Tournament {
       `🔥 ${powerUpPokemon.name} recieved power up before the battle begins`
     );
 
-    const battle = new Battle(pokemon1, pokemon2, trainer1, trainer2);
+    const battle = new Battle(pokemon1, pokemon2);
     battle.startBattle();
 
     // Remove fainted Pokémon
@@ -359,7 +331,7 @@ class Tournament {
       if (remainingTrainers.length <= 1) {
         if (remainingTrainers.length === 1) {
           console.log(
-            ` 👑 The tournament is over! ${remainingTrainers[0].name}  is the overall winner! and Won ${remainingTrainers[0].wins} Matches`
+            ` 👑 The tournament is over! ${remainingTrainers[0].name} is the overall winner!`
           );
         } else {
           console.log(`No winner, all trainers are out of Pokémon.`);
@@ -373,18 +345,16 @@ class Tournament {
 }
 
 //CREATING POKEMON
-const charizard = new FirePokemon("Charizard", 10, 100, 0);
-const stone = new EarthPokemon("Stone", 10, 100, 0);
-const starfish = new WaterPokemon("Starfish", 10, 100, 0);
-const birdy = new WindPokemon("Birdy", 10, 100, 0);
+const charizard = new FirePokemon("Charizard", 10, 100);
+const stone = new EarthPokemon("Stone", 10, 100);
+const starfish = new WaterPokemon("Starfish", 10, 100);
+const birdy = new WindPokemon("Birdy", 10, 100);
 const gengar = new DarkPokemon("Gengar", 10, 100);
-const charmander = new FirePokemon("Charmander", 10, 100, 0);
-const machop = new EarthPokemon("Machop", 10, 100, 0);
-const squirtle = new WaterPokemon("Squirtle", 10, 100, 0);
-const zubat = new WindPokemon("Zubat", 10, 100, 0);
-const mew = new DarkPokemon("Mew", 10, 100, 0);
-const necrozma = new LightPokemon("Necrozma", 10, 100, 0);
-const cosmoem = new LightPokemon("Cosmoem", 10, 100, 0);
+const charmander = new FirePokemon("Charmander", 10, 100);
+const machop = new EarthPokemon("Machop", 10, 100);
+const squirtle = new WaterPokemon("Squirtle", 10, 100);
+const zubat = new WindPokemon("Zubat", 10, 100);
+const mew = new DarkPokemon("Mew", 10, 100);
 
 //CREATING NEW TRAINER ADD ADD POKEMONS IN THEIR TEAM
 
@@ -425,18 +395,11 @@ let jijiPokemon = jiji.selectPokemon(randompick);
 jiji.showPokemon();
 console.log("");
 
-const carl = new Trainer("Carl", "Male");
-carl.choosePokemon(cosmoem);
-carl.choosePokemon(necrozma);
-let carlPokemon = carl.selectPokemon(randompick);
-carl.showPokemon();
-console.log("");
-
 //BATTLE BEGIN INDIVIDUAL BATTLE
 // let battle = new Battle(ashPokemon, brokPokemon);
 // battle.startBattle();
 
 // TOURNAMENT SETUP
-const trainers = [ash, brok, misty, lulu, jiji, carl];
+const trainers = [ash, brok, misty, lulu, jiji];
 const tournament = new Tournament(trainers);
 tournament.startTournament();
