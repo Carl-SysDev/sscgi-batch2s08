@@ -9,22 +9,10 @@
 
 // console.log("%c This is a colored log", "color: blue; font-size: 16px;");
 
-console.log(
-  "%c             _",
-  "color: #FF69B4; font-size: 16px; font-weight: bold;"
-);
-console.log(
-  "%c _ __   ___ | | _____ _ __ ___   ___  _ __",
-  "color: #FF69B4; font-size: 16px; font-weight: bold;"
-);
-console.log(
-  "%c| '_  / _ | |/ / _  '_ ` _  / _ | '_ \\ ",
-  "color: #FF69B4; font-size: 16px; font-weight: bold;"
-);
-console.log(
-  "%c| |_) | (_) |   <  __/ | | | | | (_) | | | |",
-  "color: #FF69B4; font-size: 16px; font-weight: bold;"
-);
+console.log("%c             _", "color: #FF69B4; font-size: 16px; font-weight: bold;");
+console.log("%c _ __   ___ | | _____ _ __ ___   ___  _ __", "color: #FF69B4; font-size: 16px; font-weight: bold;");
+console.log("%c| '_  / _ | |/ / _  '_ ` _  / _ | '_ \\ ", "color: #FF69B4; font-size: 16px; font-weight: bold;");
+console.log("%c| |_) | (_) |   <  __/ | | | | | (_) | | | |", "color: #FF69B4; font-size: 16px; font-weight: bold;");
 console.log(
   "%c| .__/ \\___/|_|\\_\\___|_| |_| |_|\\___/|_| |_|        ",
   "color: #FF69B4; font-size: 16px; font-weight: bold;"
@@ -160,9 +148,7 @@ class Pokemon {
     let randomhp = Math.floor(Math.random() * (15 - 5)) + 5;
     let defboost = (this.def = +5);
     this.hp = Math.min(this.hp + defboost + randomhp, 100); // THIS CODE LET HP NOT EXCEED 100
-    console.log(
-      `${this.name} active unique passive skill and gained [${defboost}] Defense and heal [${randomhp}] HP `
-    );
+    console.log(`${this.name} active unique passive skill and gained [${defboost}] Defense and heal [${randomhp}] HP `);
   }
 
   calculateDamage(opponentType, minDamage, maxDamage) {
@@ -181,11 +167,7 @@ class Pokemon {
     }
 
     const dmgMultiplier = isSuperEffective ? 0.5 : 0.2;
-    const damage = Math.floor(
-      this.level *
-        (Math.random() * (maxDamage - minDamage) + minDamage) *
-        dmgMultiplier
-    );
+    const damage = Math.floor(this.level * (Math.random() * (maxDamage - minDamage) + minDamage) * dmgMultiplier);
 
     console.log(
       `${this.name} deals ${damage} ${
@@ -388,9 +370,7 @@ class Battle {
   }
 
   startBattle() {
-    console.log(
-      `The battle Between ${this.pokemon1.name} ❌ ${this.pokemon2.name} has begun! `
-    );
+    console.log(`The battle Between ${this.pokemon1.name} ❌ ${this.pokemon2.name} has begun! `);
     console.log("");
     // let powers = Math.floor(Math.random() * 2);
     let game = true;
@@ -422,13 +402,8 @@ class Battle {
         this.pokemon2.level++;
         this.trainer2.winCounts();
         this.trainer1.losses++;
-        console.log(
-          `🢁 ${this.pokemon2.name} has Leveled Up to ${this.pokemon2.level}`
-        );
-        console.log(
-          "%c---------------------------",
-          "color: red; font-size: 30px;"
-        );
+        console.log(`🢁 ${this.pokemon2.name} has Leveled Up to ${this.pokemon2.level}`);
+        console.log("%c---------------------------", "color: red; font-size: 30px;");
       }
 
       if (this.pokemon2.hp <= 0) {
@@ -436,13 +411,8 @@ class Battle {
         this.pokemon1.level++;
         this.trainer1.winCounts();
         this.trainer2.losses++;
-        console.log(
-          `🢁 ${this.pokemon1.name} has Leveld Up to ${this.pokemon1.level}`
-        );
-        console.log(
-          "%c---------------------------",
-          "color: red; font-size: 30px;"
-        );
+        console.log(`🢁 ${this.pokemon1.name} has Leveld Up to ${this.pokemon1.level}`);
+        console.log("%c---------------------------", "color: red; font-size: 30px;");
       }
     }
   }
@@ -455,21 +425,17 @@ class Tournament {
   }
 
   randomMatchup() {
-    const availableTrainers = this.trainers.filter((trainer) =>
-      trainer.pokemons.some((pokemon) => !pokemon.isDead())
-    );
+    const availableTrainers = this.trainers.filter((trainer) => trainer.pokemons.some((pokemon) => !pokemon.isDead()));
 
     if (availableTrainers.length < 2) {
       return; // Not enough trainers for a match
     }
 
     // THIS IS THE RANDOM TRAINER SELECTION
-    const trainer1 =
-      availableTrainers[Math.floor(Math.random() * availableTrainers.length)];
+    const trainer1 = availableTrainers[Math.floor(Math.random() * availableTrainers.length)];
     let trainer2;
     do {
-      trainer2 =
-        availableTrainers[Math.floor(Math.random() * availableTrainers.length)];
+      trainer2 = availableTrainers[Math.floor(Math.random() * availableTrainers.length)];
     } while (trainer1 === trainer2);
     console.log("");
     console.log(
@@ -485,29 +451,21 @@ class Tournament {
     const pokemon2 = trainer2.nextPokemon();
 
     if (!pokemon1 || !pokemon2) {
-      console.log(
-        `Match cannot proceed. One or both trainers have no valid Pokémon.`
-      );
+      console.log(`Match cannot proceed. One or both trainers have no valid Pokémon.`);
       return;
     }
 
     //RANDOM POKEMON TO RECEIEVED POWER UP
     const powerUpPokemon = Math.random() < 0.5 ? pokemon1 : pokemon2;
     powerUpPokemon.powerUp();
-    console.log(
-      `🔥 ${powerUpPokemon.name} recieved power up before the battle begins`
-    );
+    console.log(`🔥 ${powerUpPokemon.name} recieved power up before the battle begins`);
 
     const battle = new Battle(pokemon1, pokemon2, trainer1, trainer2);
     battle.startBattle();
 
     // Remove fainted Pokémon
-    trainer1.pokemons = trainer1.pokemons.filter(
-      (pokemon) => !pokemon.isDead()
-    );
-    trainer2.pokemons = trainer2.pokemons.filter(
-      (pokemon) => !pokemon.isDead()
-    );
+    trainer1.pokemons = trainer1.pokemons.filter((pokemon) => !pokemon.isDead());
+    trainer2.pokemons = trainer2.pokemons.filter((pokemon) => !pokemon.isDead());
 
     if (trainer1.pokemons.length === 0) {
       console.log(`${trainer1.name} is out of the tournament!`);
@@ -542,69 +500,69 @@ class Tournament {
 }
 
 //CREATING POKEMON
-// const charizard = new FirePokemon("Charizard", 10, 100, 0);
-// const stone = new RockPokemon("Stone", 10, 100, 0);
-// const starfish = new WaterPokemon("Starfish", 10, 100, 0);
-// const birdy = new GrassPokemon("Birdy", 10, 100, 0);
-// const gengar = new DarkPokemon("Gengar", 10, 100);
-// const charmander = new FirePokemon("Charmander", 10, 100, 0);
-// const machop = new RockPokemon("Machop", 10, 100, 0);
-// const squirtle = new WaterPokemon("Squirtle", 10, 100, 0);
-// const zubat = new GrassPokemon("Zubat", 10, 100, 0);
-// const mew = new DarkPokemon("Mew", 10, 100, 0);
-// const necrozma = new LightPokemon("Necrozma", 10, 100, 0);
-// const cosmoem = new LightPokemon("Cosmoem", 10, 100, 0);
+const charizard = new FirePokemon("Charizard", 10, 100, 0);
+const stone = new RockPokemon("Stone", 10, 100, 0);
+const starfish = new WaterPokemon("Starfish", 10, 100, 0);
+const birdy = new GrassPokemon("Birdy", 10, 100, 0);
+const gengar = new DarkPokemon("Gengar", 10, 100);
+const charmander = new FirePokemon("Charmander", 10, 100, 0);
+const machop = new RockPokemon("Machop", 10, 100, 0);
+const squirtle = new WaterPokemon("Squirtle", 10, 100, 0);
+const zubat = new GrassPokemon("Zubat", 10, 100, 0);
+const mew = new DarkPokemon("Mew", 10, 100, 0);
+const necrozma = new LightPokemon("Necrozma", 10, 100, 0);
+const cosmoem = new LightPokemon("Cosmoem", 10, 100, 0);
 
 //CREATING NEW TRAINER ADD ADD POKEMONS IN THEIR TEAM
-// let randompick = Math.floor(Math.random() * 2); // RANDOMIZE PICK OF POKEMON
+let randompick = Math.floor(Math.random() * 2); // RANDOMIZE PICK OF POKEMON
 
-// const ash = new Trainer("Ash", "Male");
-// ash.choosePokemon(charizard);
-// ash.choosePokemon(charmander);
-// let ashPokemon = ash.selectPokemon(randompick);
-// ash.showPokemon();
-// console.log("");
+const ash = new Trainer("Ash", "Male");
+ash.choosePokemon(charizard);
+ash.choosePokemon(charmander);
+let ashPokemon = ash.selectPokemon(randompick);
+ash.showPokemon();
+console.log("");
 
-// const brok = new Trainer("Brok", "Male");
-// brok.choosePokemon(stone);
-// brok.choosePokemon(machop);
-// let brokPokemon = brok.selectPokemon(randompick);
-// brok.showPokemon();
-// console.log("");
+const brok = new Trainer("Brok", "Male");
+brok.choosePokemon(stone);
+brok.choosePokemon(machop);
+let brokPokemon = brok.selectPokemon(randompick);
+brok.showPokemon();
+console.log("");
 
-// const misty = new Trainer("Misty", "Female");
-// misty.choosePokemon(starfish);
-// misty.choosePokemon(squirtle);
-// let mistyPokemon = brok.selectPokemon(randompick);
-// misty.showPokemon();
-// console.log("");
+const misty = new Trainer("Misty", "Female");
+misty.choosePokemon(starfish);
+misty.choosePokemon(squirtle);
+let mistyPokemon = brok.selectPokemon(randompick);
+misty.showPokemon();
+console.log("");
 
-// const lulu = new Trainer("Lulu", "Female");
-// lulu.choosePokemon(birdy);
-// lulu.choosePokemon(zubat);
-// let luluPokemon = lulu.selectPokemon(randompick);
-// lulu.showPokemon();
-// console.log("");
+const lulu = new Trainer("Lulu", "Female");
+lulu.choosePokemon(birdy);
+lulu.choosePokemon(zubat);
+let luluPokemon = lulu.selectPokemon(randompick);
+lulu.showPokemon();
+console.log("");
 
-// const jiji = new Trainer("Jiji", "Female");
-// jiji.choosePokemon(gengar);
-// jiji.choosePokemon(mew);
-// let jijiPokemon = jiji.selectPokemon(randompick);
-// jiji.showPokemon();
-// console.log("");
+const jiji = new Trainer("Jiji", "Female");
+jiji.choosePokemon(gengar);
+jiji.choosePokemon(mew);
+let jijiPokemon = jiji.selectPokemon(randompick);
+jiji.showPokemon();
+console.log("");
 
-// const carl = new Trainer("Carl", "Male");
-// carl.choosePokemon(cosmoem);
-// carl.choosePokemon(necrozma);
-// let carlPokemon = carl.selectPokemon(randompick);
-// carl.showPokemon();
-// console.log("");
+const carl = new Trainer("Carl", "Male");
+carl.choosePokemon(cosmoem);
+carl.choosePokemon(necrozma);
+let carlPokemon = carl.selectPokemon(randompick);
+carl.showPokemon();
+console.log("");
 
 //BATTLE BEGIN INDIVIDUAL BATTLE
 // let battle = new Battle(ashPokemon, brokPokemon);
 // battle.startBattle();
 
-// TOURNAMENT SETUP
-// const trainers = [ash, brok, misty, lulu, jiji, carl];
-// const tournament = new Tournament(trainers);
-// tournament.startTournament();
+//TOURNAMENT SETUP
+const trainers = [ash, brok, misty, lulu, jiji, carl];
+const tournament = new Tournament(trainers);
+tournament.startTournament();
