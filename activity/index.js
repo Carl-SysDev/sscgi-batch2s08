@@ -41,7 +41,97 @@ console.log(
 // console.log("| .__/ \\___/|_|\\_\\___|_| |_| |_|\\___/|_| |_|        ");
 // console.log("|_|                                                    ");
 
+// Add menu for adding trainers, adding pokemon, selecting pokemon, showing trainers and their chosen pokemon, and starting tournament battles
+// function mainMenu() {
+//   //MENU IS IN THE ARRAY TO SELECT INDEX WHEN USER IS CHOOSING
+//   const menuOptions = [
+//     " [0] Add Trainer",
+//     " [1] Add Pokemon",
+//     " [2] Select Pokemon",
+//     " [3] Show Trainers",
+//     " [4] Start Tournament",
+//     " [5] Quit",
+//   ];
+
+//   //PROMPT TO GET USER INPUT
+//   // let prompt = "Enter a menu option: ";
+//   // let choice;
+
+//   do {
+//     console.log(menuOptions.join("\n"));
+//     // choice = prompt(prompt);
+//     let playerInput = prompt("Please enter your name", "Harry Potter");
+//     let choice = playerInput;
+//     switch (choice) {
+//       case menuOptions[0]:
+//         addTrainer();
+//         break;
+//       case menuOptions[1]:
+//         addPokemon();
+//         break;
+//       case menuOptions[2]:
+//         selectPokemon();
+//         break;
+//       case menuOptions[3]:
+//         showTrainers();
+//         break;
+//       case menuOptions[4]:
+//         startTournament();
+//         break;
+//       case menuOptions[5]:
+//         process.exit();
+//         break;
+//       default:
+//         console.log("Invalid choice");
+//     }
+//   } while (choice !== menuOptions[5]);
+// }
+
+// // Add Pokemon
+// function addPokemon() {
+//   const name = prompt("Enter the pokemon's name: ");
+//   const type = prompt("Enter the pokemon's type: ");
+//   const level = parseInt(prompt("Enter the pokemon's level: "));
+//   const hp = parseInt(prompt("Enter the pokemon's HP: "));
+//   const def = parseInt(prompt("Enter the pokemon's defense: "));
+//   const newPokemon = new Pokemon(name, type, level, hp, def);
+//   const trainer = trainers[trainers.length - 1]; // Get the last trainer added
+//   trainer.choosePokemon(newPokemon);
+// }
+
+// // Select Pokemon
+// function selectPokemon() {
+//   const trainer = trainers[trainers.length - 1]; // Get the last trainer added
+//   const pokemonIndex = parseInt(
+//     prompt("Enter the index of the pokemon to select: ")
+//   );
+//   const selectedPokemon = trainer.selectPokemon(pokemonIndex);
+//   console.log(`Selected Pokemon: ${selectedPokemon.name}`);
+// }
+
+// // Show Trainers and their chosen pokemon
+// function showTrainers() {
+//   console.log("Trainers and their chosen pokemon:");
+//   trainers.forEach((trainer) => {
+//     console.log(`${trainer.name}'s Pokemon:`);
+//     trainer.pokemons.forEach((pokemon) => console.log(`- ${pokemon.name}`));
+//   });
+// }
+
+// // Start Tournament
+// function startTournament() {
+//   if (trainers.length < 2) {
+//     console.log("Not enough trainers to start a tournament");
+//     return;
+//   }
+//   const tournament = new Tournament(trainers);
+//   tournament.startTournament();
+// }
+
+// mainMenu();
+
 //POKEMON BASE CLASS
+
 class Pokemon {
   constructor(name, type, level, hp, def) {
     this.name = name;
@@ -452,69 +542,69 @@ class Tournament {
 }
 
 //CREATING POKEMON
-const charizard = new FirePokemon("Charizard", 10, 100, 0);
-const stone = new RockPokemon("Stone", 10, 100, 0);
-const starfish = new WaterPokemon("Starfish", 10, 100, 0);
-const birdy = new GrassPokemon("Birdy", 10, 100, 0);
-const gengar = new DarkPokemon("Gengar", 10, 100);
-const charmander = new FirePokemon("Charmander", 10, 100, 0);
-const machop = new RockPokemon("Machop", 10, 100, 0);
-const squirtle = new WaterPokemon("Squirtle", 10, 100, 0);
-const zubat = new GrassPokemon("Zubat", 10, 100, 0);
-const mew = new DarkPokemon("Mew", 10, 100, 0);
-const necrozma = new LightPokemon("Necrozma", 10, 100, 0);
-const cosmoem = new LightPokemon("Cosmoem", 10, 100, 0);
+// const charizard = new FirePokemon("Charizard", 10, 100, 0);
+// const stone = new RockPokemon("Stone", 10, 100, 0);
+// const starfish = new WaterPokemon("Starfish", 10, 100, 0);
+// const birdy = new GrassPokemon("Birdy", 10, 100, 0);
+// const gengar = new DarkPokemon("Gengar", 10, 100);
+// const charmander = new FirePokemon("Charmander", 10, 100, 0);
+// const machop = new RockPokemon("Machop", 10, 100, 0);
+// const squirtle = new WaterPokemon("Squirtle", 10, 100, 0);
+// const zubat = new GrassPokemon("Zubat", 10, 100, 0);
+// const mew = new DarkPokemon("Mew", 10, 100, 0);
+// const necrozma = new LightPokemon("Necrozma", 10, 100, 0);
+// const cosmoem = new LightPokemon("Cosmoem", 10, 100, 0);
 
 //CREATING NEW TRAINER ADD ADD POKEMONS IN THEIR TEAM
-let randompick = Math.floor(Math.random() * 2); // RANDOMIZE PICK OF POKEMON
+// let randompick = Math.floor(Math.random() * 2); // RANDOMIZE PICK OF POKEMON
 
-const ash = new Trainer("Ash", "Male");
-ash.choosePokemon(charizard);
-ash.choosePokemon(charmander);
-let ashPokemon = ash.selectPokemon(randompick);
-ash.showPokemon();
-console.log("");
+// const ash = new Trainer("Ash", "Male");
+// ash.choosePokemon(charizard);
+// ash.choosePokemon(charmander);
+// let ashPokemon = ash.selectPokemon(randompick);
+// ash.showPokemon();
+// console.log("");
 
-const brok = new Trainer("Brok", "Male");
-brok.choosePokemon(stone);
-brok.choosePokemon(machop);
-let brokPokemon = brok.selectPokemon(randompick);
-brok.showPokemon();
-console.log("");
+// const brok = new Trainer("Brok", "Male");
+// brok.choosePokemon(stone);
+// brok.choosePokemon(machop);
+// let brokPokemon = brok.selectPokemon(randompick);
+// brok.showPokemon();
+// console.log("");
 
-const misty = new Trainer("Misty", "Female");
-misty.choosePokemon(starfish);
-misty.choosePokemon(squirtle);
-let mistyPokemon = brok.selectPokemon(randompick);
-misty.showPokemon();
-console.log("");
+// const misty = new Trainer("Misty", "Female");
+// misty.choosePokemon(starfish);
+// misty.choosePokemon(squirtle);
+// let mistyPokemon = brok.selectPokemon(randompick);
+// misty.showPokemon();
+// console.log("");
 
-const lulu = new Trainer("Lulu", "Female");
-lulu.choosePokemon(birdy);
-lulu.choosePokemon(zubat);
-let luluPokemon = lulu.selectPokemon(randompick);
-lulu.showPokemon();
-console.log("");
+// const lulu = new Trainer("Lulu", "Female");
+// lulu.choosePokemon(birdy);
+// lulu.choosePokemon(zubat);
+// let luluPokemon = lulu.selectPokemon(randompick);
+// lulu.showPokemon();
+// console.log("");
 
-const jiji = new Trainer("Jiji", "Female");
-jiji.choosePokemon(gengar);
-jiji.choosePokemon(mew);
-let jijiPokemon = jiji.selectPokemon(randompick);
-jiji.showPokemon();
-console.log("");
+// const jiji = new Trainer("Jiji", "Female");
+// jiji.choosePokemon(gengar);
+// jiji.choosePokemon(mew);
+// let jijiPokemon = jiji.selectPokemon(randompick);
+// jiji.showPokemon();
+// console.log("");
 
-const carl = new Trainer("Carl", "Male");
-carl.choosePokemon(cosmoem);
-carl.choosePokemon(necrozma);
-let carlPokemon = carl.selectPokemon(randompick);
-carl.showPokemon();
-console.log("");
+// const carl = new Trainer("Carl", "Male");
+// carl.choosePokemon(cosmoem);
+// carl.choosePokemon(necrozma);
+// let carlPokemon = carl.selectPokemon(randompick);
+// carl.showPokemon();
+// console.log("");
 
 //BATTLE BEGIN INDIVIDUAL BATTLE
 // let battle = new Battle(ashPokemon, brokPokemon);
 // battle.startBattle();
 
 // TOURNAMENT SETUP
-const trainers = [ash, brok, misty, lulu, jiji, carl];
-const tournament = new Tournament(trainers);
-tournament.startTournament();
+// const trainers = [ash, brok, misty, lulu, jiji, carl];
+// const tournament = new Tournament(trainers);
+// tournament.startTournament();
